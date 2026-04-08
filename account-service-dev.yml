@@ -1,0 +1,18 @@
+server:
+  port: 8081  # port dédié à account-service
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/microfinancehub
+    username: postgres
+    password: axelle3928
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
