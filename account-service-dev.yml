@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/microfinance_db
+    url: jdbc:postgresql://localhost:5433/microfinance_db
     username: postgres
     password: axelle3928
     driver-class-name: org.postgresql.Driver
@@ -11,8 +11,27 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+
+
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+
+
+## Noms pour tes échanges et files d'attente
+app:
+  rabbitmq:
+    exchange: finance.exchange
+    routingkey: balance.updated
