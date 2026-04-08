@@ -1,5 +1,5 @@
 server:
-  port: 8081  # port dédié à account-service
+  port: 8081  # port dédié à account service
 
 spring:
   datasource:
