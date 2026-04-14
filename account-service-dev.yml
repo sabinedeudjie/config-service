@@ -63,13 +63,15 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
-#CamPay properties
+
+# CamPay
 campay:
   base:
     url: https://demo.campay.net/api
+
   app:
-    username: yPRWmHv3tzufCeblJFwmKxpjwl0p4gBlRn1B6BKTPikSYTmBOp_g3OWtgNYW0y7fnqI27tyo5b-yiHPHECMWCg
+    username: yPRWmHv3tzufCeblJFwmKxpjwl0p4gBlRn1B6BKTPikSYTmBOp_g3OWtgNYW0y7fnqI27tyo5b
     password: TZWYhJFfrhTp8dwtP1ahNGkIuySUb8sOgSLrWLbgaXuqdq0tm1eW9_gYXG1vK8cdtQ-lHDeyf7rISUl7-JBESQ
-#WebHook key
     webhook:
       key: O6WAcXeMCalLDrXYRwqt-EGJOioYKLRkS6geEmIhXMkdSQIFGm9AYwcs_K4m-go60ejTx_CUCmmch-ugjCBmaQ
+  permanent-access-token: 93d091b75e17afcece1b424631b98261918eaf9d
