@@ -1,9 +1,9 @@
 server:
-  port: 8081  # port dédié à account service
+  port: 8083  # port dédié à account service
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/microfinance_db
+    url: jdbc:postgresql://localhost:5433/microfinancehub
     username: postgres
     password: axelle3928
     driver-class-name: org.postgresql.Driver
@@ -20,7 +20,7 @@ spring:
       port: 5672
       username: guest
       password: guest
-
+      virtual-host: /
 
 
 eureka:
@@ -35,3 +35,41 @@ app:
   rabbitmq:
     exchange: finance.exchange
     routingkey: balance.updated
+
+
+# Configuration JWT (partagée avec tous les services)
+
+jwt:
+  secret: ${JWT_SECRET:MicroFinanceHubSecretKey2024SuperSecureKeyForJWT}
+  expiration: 86400000    # 24h en millisecondes
+
+
+# Actuator (monitoring & health check)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+
+# Logging
+logging:
+  level:
+    com.microfinancehub: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+#CamPay properties
+campay:
+  base:
+    url: https://demo.campay.net/api
+  app:
+    username: yPRWmHv3tzufCeblJFwmKxpjwl0p4gBlRn1B6BKTPikSYTmBOp_g3OWtgNYW0y7fnqI27tyo5b-yiHPHECMWCg
+    password: TZWYhJFfrhTp8dwtP1ahNGkIuySUb8sOgSLrWLbgaXuqdq0tm1eW9_gYXG1vK8cdtQ-lHDeyf7rISUl7-JBESQ
+#WebHook key
+    webhook:
+      key: O6WAcXeMCalLDrXYRwqt-EGJOioYKLRkS6geEmIhXMkdSQIFGm9AYwcs_K4m-go60ejTx_CUCmmch-ugjCBmaQ
