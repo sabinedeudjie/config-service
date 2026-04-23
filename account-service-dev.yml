@@ -1,11 +1,11 @@
 server:
-  port: 8083  # port dédié à account service
+  port: ${ACCOUNT_SERVICE_PORT:8083}
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/microfinancehub
-    username: postgres
-    password: axelle3928
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/microfinancehub}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:axelle3928}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -13,21 +13,20 @@ spring:
     show-sql: true
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
     rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
+      host: ${RABBITMQ_HOST:localhost}
+      port: ${RABBITMQ_PORT:5672}
+      username: ${RABBITMQ_USERNAME:guest}
+      password: ${RABBITMQ_PASSWORD:guest}
       virtual-host: /
 
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
-
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
 
 
 ## Noms pour tes échanges et files d'attente
@@ -35,12 +34,13 @@ app:
   rabbitmq:
     exchange: finance.exchange
     routingkey: balance.updated
+  transaction:
+    montant-minimum: 1
 
 
 # Configuration JWT (partagée avec tous les services)
-
 jwt:
-  secret: ${JWT_SECRET:MicroFinanceHubSecretKey2024SuperSecureKeyForJWT}
+  secret: ${JWT_SECRET:dev-secret-key-for-local-development-only-minimum-32-chars}
   expiration: 86400000    # 24h en millisecondes
 
 
@@ -67,11 +67,10 @@ logging:
 # CamPay
 campay:
   base:
-    url: https://demo.campay.net/api
-
+    url: ${CAMPAY_BASE_URL:https://demo.campay.net}
   app:
-    username: yPRWmHv3tzufCeblJFwmKxpjwl0p4gBlRn1B6BKTPikSYTmBOp_g3OWtgNYW0y7fnqI27tyo5b
-    password: TZWYhJFfrhTp8dwtP1ahNGkIuySUb8sOgSLrWLbgaXuqdq0tm1eW9_gYXG1vK8cdtQ-lHDeyf7rISUl7-JBESQ
+    username: ${CAMPAY_USERNAME:dev-username}
+    password: ${CAMPAY_PASSWORD:dev-password}
     webhook:
-      key: O6WAcXeMCalLDrXYRwqt-EGJOioYKLRkS6geEmIhXMkdSQIFGm9AYwcs_K4m-go60ejTx_CUCmmch-ugjCBmaQ
-  permanent-access-token: 93d091b75e17afcece1b424631b98261918eaf9d
+      key: ${CAMPAY_WEBHOOK_KEY:dev-webhook-key}
+    permanent-access-token: ${CAMPAY_PERMANENT_TOKEN:dev-token}
