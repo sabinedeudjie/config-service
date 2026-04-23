@@ -73,4 +73,4 @@ campay:
     password: ${CAMPAY_PASSWORD:dev-password}
     webhook:
       key: ${CAMPAY_WEBHOOK_KEY:dev-webhook-key}
-    permanent-access-token: ${CAMPAY_PERMANENT_TOKEN:dev-token}
+    permanent-access-token: ${CAMPAY_PERMANENT_TOKEN:67aefb0b2fda032d625ceb7bdcd0abce6b2b20b3}
