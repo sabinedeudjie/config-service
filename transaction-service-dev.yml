@@ -1,0 +1,77 @@
+server:
+  port: ${TRANSACTION_SERVICE_PORT:8087}
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/microfinancehub}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:axelle3928}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  data:
+    rabbitmq:
+      host: ${RABBITMQ_HOST:localhost}
+      port: ${RABBITMQ_PORT:5672}
+      username: ${RABBITMQ_USERNAME:guest}
+      password: ${RABBITMQ_PASSWORD:guest}
+      virtual-host: /
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+
+
+app:
+  rabbitmq:
+    exchange: finance.exchange
+    routingkey: balance.updated
+  transaction:
+    montant-minimum: 1
+
+# URL interne du service-compte (sans gateway pour l'instant)
+account:
+  service:
+    url: ${ACCOUNT_SERVICE_URL:http://localhost:8083}
+
+
+# Configuration JWT (partagée avec tous les services)
+jwt:
+  secret: ${JWT_SECRET:dev-secret-key-for-local-development-only-minimum-32-chars}
+  expiration: 86400000    # 24h en millisecondes
+
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+
+# Logging
+logging:
+  level:
+    com.microfinancehub: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+
+# CamPay
+campay:
+  base:
+    url: ${CAMPAY_BASE_URL:https://api.campay.net}
+  app:
+    username: ${CAMPAY_USERNAME:REMPLACER_PAR_TON_USERNAME}
+    password: ${CAMPAY_PASSWORD:REMPLACER_PAR_TON_PASSWORD}
+    webhook:
+      key: ${CAMPAY_WEBHOOK_KEY:REMPLACER_PAR_TON_WEBHOOK_KEY}
+    permanent-access-token: ${CAMPAY_PERMANENT_TOKEN:REMPLACER_PAR_TON_TOKEN_PROD}
