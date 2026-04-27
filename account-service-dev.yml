@@ -12,9 +12,6 @@ spring:
       ddl-auto: update
     show-sql: true
   data:
-    redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
     rabbitmq:
       host: ${RABBITMQ_HOST:localhost}
       port: ${RABBITMQ_PORT:5672}
@@ -27,15 +24,6 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
-
-
-## Noms pour tes échanges et files d'attente
-app:
-  rabbitmq:
-    exchange: finance.exchange
-    routingkey: balance.updated
-  transaction:
-    montant-minimum: 1
 
 
 # Configuration JWT (partagée avec tous les services)
@@ -62,15 +50,3 @@ logging:
     org.springframework.security: INFO
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-
-
-# CamPay
-campay:
-  base:
-    url: ${CAMPAY_BASE_URL:https://demo.campay.net}
-  app:
-    username: ${CAMPAY_USERNAME:dev-username}
-    password: ${CAMPAY_PASSWORD:dev-password}
-    webhook:
-      key: ${CAMPAY_WEBHOOK_KEY:dev-webhook-key}
-    permanent-access-token: ${CAMPAY_PERMANENT_TOKEN:67aefb0b2fda032d625ceb7bdcd0abce6b2b20b3}
